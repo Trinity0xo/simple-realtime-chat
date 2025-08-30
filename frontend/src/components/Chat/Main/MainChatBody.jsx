@@ -96,10 +96,10 @@ const MainChatBody = () => {
           <MessageItem
             $token={token}
             key={message._id}
-            $isOwnMessage={message.senderId == authUser._id}
+            $isOwnMessage={message.senderId === authUser._id}
           >
             <ChatMessage
-              isOwnMessage={message.senderId == authUser._id}
+              isOwnMessage={message.senderId === authUser._id}
               message={message}
             />
           </MessageItem>

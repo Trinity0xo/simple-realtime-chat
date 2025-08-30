@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MessageApiContext } from "../contexts/messageApiContext";
 import { useContext, useEffect, useState } from "react";
 import { updateProfile } from "../slices/authSlice";
+import { API_URL } from "../lib/axios";
 
 const { Text, Title } = Typography;
 const { useToken } = theme;
@@ -133,7 +134,7 @@ const ProfilePage = () => {
                     file
                       ? URL.createObjectURL(file)
                       : authUser?.avatar
-                      ? `http://192.168.1.2:8080/files/${authUser.avatar}`
+                      ? `${API_URL}/files/${authUser.avatar}`
                       : "/default-avatar.png"
                   }
                 />

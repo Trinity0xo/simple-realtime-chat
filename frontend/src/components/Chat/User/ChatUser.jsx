@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Avatar, Typography, theme } from "antd";
 import { useSelector } from "react-redux";
+import { API_URL } from "../../../lib/axios";
 
 const { Text } = Typography;
 
@@ -31,7 +32,7 @@ const ChatUser = ({ user }) => {
         size={42}
         src={
           user?.avatar
-            ? `http://localhost:8080/files/${user.avatar}`
+            ? `${API_URL}/files/${user.avatar}`
             : "/default-avatar.png"
         }
         alt="avatar"

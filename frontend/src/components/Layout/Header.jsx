@@ -9,6 +9,7 @@ import { MessageApiContext } from "../../contexts/messageApiContext";
 import Container from "./Container";
 import { useNavigate } from "react-router-dom";
 import { disconnectSocket, getSocket } from "../../lib/socket";
+import { API_URL } from "../../lib/axios";
 
 const { useToken } = theme;
 
@@ -99,7 +100,7 @@ const Header = () => {
                   size={32}
                   src={
                     authUser?.avatar
-                      ? `http://192.168.1.2:8080/files/${authUser.avatar}`
+                      ? `${API_URL}/files/${authUser.avatar}`
                       : "/default-avatar.png"
                   }
                 />

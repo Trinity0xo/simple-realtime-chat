@@ -49,7 +49,6 @@ const sendChatMessage = asyncMiddleware(async (req, res) => {
 
   if (files && files.length > 0) {
     for (const file of files) {
-      console.log(file);
       fileNames.push(file.filename);
     }
   }

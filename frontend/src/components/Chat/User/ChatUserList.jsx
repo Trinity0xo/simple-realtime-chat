@@ -40,7 +40,7 @@ const ChatUserList = () => {
   if (isUsersLoading) {
     return (
       <UserList>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((value, index) => (
           <UserItem $token={token} key={index}>
             <Skeleton
               avatar={{ shape: "circle" }}

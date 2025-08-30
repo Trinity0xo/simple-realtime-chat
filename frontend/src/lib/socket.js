@@ -1,8 +1,7 @@
 import { io } from "socket.io-client";
 import { setOnlineUsers } from "../slices/authSlice";
 import { setMessages } from "../slices/chatSlice";
-
-const BASE_URL = "192.168.1.2:8080";
+import { API_URL } from "./axios";
 
 let socket = null;
 
@@ -11,7 +10,7 @@ export const connectSocket = (userId, dispatch) => {
     return;
   }
 
-  socket = io(BASE_URL, {
+  socket = io(API_URL, {
     query: { userId },
   });
 

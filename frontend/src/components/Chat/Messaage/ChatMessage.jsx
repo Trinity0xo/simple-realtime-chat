@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Avatar, theme, Typography } from "antd";
-
 import { formatMessageDate } from "../../../lib/utils";
 import { Image } from "antd";
 import { useSelector } from "react-redux";
+import { API_URL } from "../../../lib/axios";
 
 const { useToken } = theme;
 const { Text } = Typography;
@@ -26,14 +26,23 @@ const Bubble = styled.div`
   box-shadow: ${({ $token }) => $token.boxShadowTertiary};
 `;
 
-const ImagesContainer = styled.div``;
+const AvatarContainer = styled.div`
+  flex-shrink: 0;
+`;
+
+const ImagesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 const ImageContainer = styled.div`
-  max-width: 120px;
-  max-height: 120px;
+  flex: 1 0
+    ${({ $count }) => {
+      if ($count === 1) return "100%";
+      return "50%";
+    }};
   border: ${({ $token }) =>
     `${$token.lineWidth}px ${$token.lineType} ${$token.colorBorder}`};
-
   background-color: ${({ $token }) => $token.colorBgContainer};
   overflow: hidden;
 `;
@@ -47,25 +56,31 @@ const ChatMessage = ({ isOwnMessage, message }) => {
       {isOwnMessage ? (
         <></>
       ) : (
-        <Avatar
-          src={
-            selectedUser?.avatar
-              ? `http://localhost:8080/files/${selectedUser.avatar}`
-              : "/default-avatar.png"
-          }
-          alt="avatar"
-        />
+        <AvatarContainer>
+          <Avatar
+            src={
+              selectedUser?.avatar
+                ? `${API_URL}/files/${selectedUser.avatar}`
+                : "/default-avatar.png"
+            }
+            alt="avatar"
+          />
+        </AvatarContainer>
       )}
 
       <Bubble $isOwnMessage={isOwnMessage} $token={token}>
         {message.images && message.images.length > 0 && (
           <ImagesContainer $token={token}>
             {message.images.map((img, index) => (
-              <ImageContainer key={index} $token={token}>
+              <ImageContainer
+                key={index}
+                $token={token}
+                $count={message.images.length}
+              >
                 <Image
                   width="100%"
                   height="100%"
-                  src={`http://localhost:8080/files/${img}`}
+                  src={`${API_URL}/files/${img}`}
                   alt={`chat-img-${index}`}
                 />
               </ImageContainer>

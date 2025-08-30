@@ -74,7 +74,6 @@ const MainChatFooter = () => {
 
     formData.append("text", values?.text || "");
     for (const file of fileList) {
-      console.log(file);
       formData.append("images", file.originFileObj);
     }
 
@@ -118,26 +117,30 @@ const MainChatFooter = () => {
             <Form.Item
               name="text"
               rules={[
-                () => ({
-                  validator(_, value) {
-                    if (fileList && fileList.length > 0) {
-                      return Promise.resolve();
-                    }
-                    if (!value || value.trim().length === 0) {
-                      return Promise.reject(
-                        new Error("Please input your message!")
-                      );
-                    }
-                    if (value.length < 1) {
-                      return Promise.reject(
-                        new Error("Message must be at least 1 character!")
-                      );
-                    }
-
-                    return Promise.resolve();
-                  },
-                }),
+                { required: true, message: "Please input your message!" },
+                { min: 1, message: "message must be at least 1 characters!" },
               ]}
+              // rules={[
+              //   () => ({
+              //     validator(_, value) {
+              //       if (fileList && fileList.length > 0) {
+              //         return Promise.resolve();
+              //       }
+              //       if (!value || value.trim().length === 0) {
+              //         return Promise.reject(
+              //           new Error("Please input your message!")
+              //         );
+              //       }
+              //       if (value.length < 1) {
+              //         return Promise.reject(
+              //           new Error("Message must be at least 1 character!")
+              //         );
+              //       }
+
+              //       return Promise.resolve();
+              //     },
+              //   }),
+              // ]}
             >
               <Input placeholder="Message..." />
             </Form.Item>

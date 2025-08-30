@@ -24,12 +24,8 @@ const deleteFile = (fileName) => {
   const filePath = path.join(env.UPLOAD_PATH, fileName);
 
   fs.unlink(filePath, (error) => {
-    if (error) {
-      if (error.code === "ENOENT") {
-        console.log("File not found:", filePath);
-      } else {
-        console.log("Error deleting file:", error);
-      }
+    if (error && error.code === "ENOENT") {
+      console.log("Error deleting file:", error);
     } else {
       console.log("Deleted file:", filePath);
     }
